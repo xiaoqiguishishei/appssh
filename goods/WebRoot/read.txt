@@ -1,0 +1,89 @@
+项目的需求(分模块)
+	用户管理模块
+		1. 注册功能
+		2. 激活, 根据用户注册时输入的邮箱, 发送一封激活邮件(发广告)
+		3. 登录功能
+		4. 修改用户信息(改密码)
+		5. 退出系统
+	分类模块
+		1. 查询分类, 显示到界面
+		2. 点击分类时, 显示分类下的图书信息
+	图书模块
+		1. 展示图书
+	购物车模块
+		1. 添加到购物车
+		2. 删除购物车中的书籍
+		3. 修改购物车中信息
+		4. 查看购物车中的信息
+	订单模块
+		1. 查询订单
+		2. 生成订单
+		3. 删除订单
+		4. 修改订单
+		5. 支付
+		
+建包(三层架构)
+	
+	com.huike.utils  常用的工具类
+
+	com.huike.user.dao
+	com.huike.user.web.controller
+	com.huike.user.service
+	com.huike.user.domain
+	
+	com.huike.book.dao
+	com.huike.book.web.controller
+	com.huike.book.service
+	com.huike.book.domain
+	
+	com.huike.order.dao
+	com.huike.order.web.controller
+	com.huike.order.service
+	com.huike.order.domain
+	
+	com.huike.domain		(实体)
+	com.huike.service		(业务逻辑)
+	com.huike.dao			(数据库增删改查)
+	com.huike.web.controller(web层)
+	com.huike.web.filter	(web层,过滤器)
+	com.huike.web.formbean	(web层,验证表单)
+	
+-- 实体类
+	根据设计好的数据库表添加实体类
+
+-- 导包
+	连接池(c3p0,dbcp) dbUtils(jdbc操作) beanUtils 数据库驱动  上传文件  发送邮件相关的
+
+-- 工具类  WebUtils  JDBCUtils
+	导入了一些列的工具
+	commons :	公共的工具类  生成uuid, 将map转为javabean(实体对象)
+	filters :	通用的过滤器, 统一设置项目编码的过滤器
+	jdbc	:	数据库操作相关的工具类
+	
+	mail	:	发邮件相关的工具类, 用到用户注册
+		- MailUtils: 具体负责发邮件, 发邮件必须借助邮箱服务器, 163邮箱, 腾讯, 雅虎, 新浪
+			注册一个邮箱, 项目中使用163邮箱
+		- Mail : 邮件的实体类
+		- AttachBean : 封装了附件信息的类
+	servlet	:	定义了一个所有的servlet的父类BaseServlet
+	vcode	:	生成验证码图片的servlet, 以及验证码的工具类
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
