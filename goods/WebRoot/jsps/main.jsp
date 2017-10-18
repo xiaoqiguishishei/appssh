@@ -6,7 +6,7 @@
 <html>
   <head>
     
-    <title>main</title>
+    <title>main与众不同的标题</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
