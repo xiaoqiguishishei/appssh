@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	  注意：  1. 映射文件必须和接口放在一起
+	      2. 名称空间的值必须是接口的全名称
+	      3. insert ,update,delete,select 标签的id的值必须是接口中执行此sql语句的方法的名字
+	      4. 映射文件名和接口名是一致的(首字母小写)
+ -->
+<mapper namespace="com.huike.dao.ClassesDao">
+
+	<resultMap type="Classes" id="classesMap">
+		<id column="cid" property="cid" />
+		<result property="className" column="className"/>
+		<result property="startTime" column="startTime"/>
+		<result property="timeLength" column="timeLength"/>
+		<result property="courseStatus" column="courseStatus"/>
+		
+		<association property="classType" javaType="ClassType">
+			<id column="id" property="id"/>
+			<result property="type" column="type"/>
+		</association>
+		
+		<association property="teacher" javaType="Teacher">
+			<id column="tid" property="tid"/>
+			<result property="teacherName" column="teacherName"/>
+			<result property="workExperience" column="workExperience"/>
+			<result property="teacherState" column="teacherState"/>
+			<result property="registerTime" column="registerTime"/>
+		</association>
+		
+		<association property="lecturer" javaType="lecturer">
+			<id column="lid" property="lid"/>
+			<result property="lecturerName" column="lecturerName"/>
+			<result property="workExperience" column="workExperience"/>
+			<result property="lecturerState" column="lecturerState"/>
+			<result property="registerTime" column="registerTime"/>
+		</association>
+		
+	</resultMap>
+
+	<select id="findAll" resultMap="classesMap">
+		SELECT  c.*,ct.*,t.*,l.* FROM classes c 
+				INNER JOIN classType ct ON c.classType_cid = ct.id
+			    INNER JOIN teacher t  ON c.teacher_tid = t.tid
+			    INNER JOIN lecturer l ON c.lecturer_lid = l.lid
+	</select>
+	
+	<update id="update" >
+		update classes set courseStatus = #{courseStatus} where cid = #{cid}
+	</update>
+
+	<select id="getTotalCount" resultType="int">
+		select count(cid) from classes
+	</select>
+	
+	<select id="getPageList" parameterType="java.util.Map" resultMap="classesMap" >
+		SELECT  c.*,ct.*,t.*,l.* FROM classes c 
+				INNER JOIN classType ct ON c.classType_cid = ct.id
+			    INNER JOIN teacher t  ON c.teacher_tid = t.tid
+			    INNER JOIN lecturer l ON c.lecturer_lid = l.lid
+			    limit #{itemIndex},#{pageCount}
+	</select>
+	
+	<select id="getTotalCountByCondition" parameterType="Classes" resultType="int">
+		SELECT  count(c.cid) FROM classes c 
+				INNER JOIN classType ct ON c.classType_cid = ct.id
+			    INNER JOIN teacher t  ON c.teacher_tid = t.tid
+			    INNER JOIN lecturer l ON c.lecturer_lid = l.lid
+			    where 1 = 1
+		<if test="className !=''">
+			and c.className like #{className}
+		</if>
+		<if test="classType.type != ''">
+			and ct.type = #{classType.type}
+		</if>
+		<if test = "teacher.teacherName != ''">
+			and t.teacherName = #{teacher.teacherName}
+		</if>
+		<if test= "lecturer.lecturerName != ''">
+			and l.lecturerName = #{lecturer.lecturerName}
+		</if>
+		<if test="courseStatus != ''">
+			and courseStatus = #{courseStatus}
+		</if>
+	</select>
+	
+	<select id="getPageListByCondition" parameterType="java.util.Map" resultMap="classesMap" >
+		SELECT  c.*,ct.*,t.*,l.* FROM classes c 
+				INNER JOIN classType ct ON c.classType_cid = ct.id
+			    INNER JOIN teacher t  ON c.teacher_tid = t.tid
+			    INNER JOIN lecturer l ON c.lecturer_lid = l.lid
+			    where 1=1
+		<if test="classes.className != null">
+			and c.className  like  #{classes.className}
+		</if>
+		<!-- <if test="classType.type != null">
+			and ct.classType = #{classType.type}
+		</if>
+		<if test = "teacher.teacherName != null">
+			and t.teacherName = #{teacher.teacherName}
+		</if>
+		<if test= "lecturer.lecturerName != null">
+			and l.lecturerName = #{lecturer.lecturerName}
+		</if>
+		<if test="courseStatus != null">
+			and courseStatus = #{courseStatus}
+		</if> -->
+		 limit #{itemIndex},#{pageCount}
+	</select>
+</mapper>

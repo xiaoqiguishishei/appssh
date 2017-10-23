@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+          http://www.springframework.org/schema/mvc
+         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+         ">
+   <!-- 开启自动扫描的包 -->
+   <context:component-scan base-package="com" use-default-filters="false">
+   		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+   </context:component-scan>
+   
+   <!-- 开启mvc的注解配置 -->
+   <mvc:annotation-driven >
+   </mvc:annotation-driven>
+   
+   <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+   
+   <!-- 
+   		location: 指定静态资源所在的位置
+   			/  工程目录及其子包
+   		mapping:  指定访问静态资源的方式
+   		*: 任意字符串，不支持层级关系
+   		** ：支持层级关系
+    -->
+   <mvc:resources location="/" mapping="/**" />
+   
+   <!-- 视图解析器 -->
+   <bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+   		
+   		<!-- 视图解析器会寻找的文件的完整路径是：
+   			 prefix + 返回的字符串  + suffix 
+   		 -->
+   
+        <!-- 前缀 -->
+   		<property name="prefix" value="/" />
+   		<!-- 后缀 -->
+   		<property name="suffix" value=".jsp" />
+   </bean>
+   
+   
+</beans>
