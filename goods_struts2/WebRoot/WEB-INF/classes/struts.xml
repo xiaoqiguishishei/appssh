@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+  <!-- <package name="default" namespace="/user" extends="struts-default"> -->
+  <package name="default" namespace="/user" extends="json-default">
+  
+  		<action name="loginAction" 
+  			class="com.huike.user.controller.UserAction" method="login">
+			<result type="redirect">/index.jsp</result>
+			<result name="login">/jsps/user/login.jsp</result>  		
+  		</action>
+  		<action name="registerAction" 
+  			class="com.huike.user.controller.UserAction" method="register">
+			<result name="register">/jsps/user/regist.jsp</result>  
+			<result name="msg">/jsps/msg.jsp</result> 		
+  		</action>
+  		<action name="updateLoginpassAction" 
+  			class="com.huike.user.controller.UserAction" method="updateLoginpass">
+  			<result name="pwd">/jsps/user/pwd.jsp</result>
+  			<result name="msg">/jsps/msg.jsp</result>
+  		</action>
+  		
+  		<action name="validateLoginpassAction" 
+  			class="com.huike.user.controller.UserAction" method="validateLoginpass">
+			<result>/jsp/user/login.jsp</result>
+  		</action>
+  		<action name="validateLoginnameAction" 
+  			class="com.huike.user.controller.UserAction" method="validateLoginname">
+			<result name="msg" type="redirect">/jsps/msg.jsp</result> 		
+  		</action>
+  		
+  		<action name="verifyCodeAction" 
+  			class="com.huike.user.controller.VerifyCodeAction">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+  		</action>
+  		<action name="validateVerifycodeAction" 
+  			class="com.huike.user.controller.UserAction" method="validateVerifycode">
+  		</action>
+  		
+  		<action name="logoutAction" 
+  			class="com.huike.user.controller.UserAction" method="logout">
+			<result>/jsps/user/login.jsp</result>  		
+  		</action>
+  </package>
+  
+  <!-- 名字改了, 需要另起一个模块 -->
+  <package name="category" namespace="/category" extends="struts-default">
+  		<action name="queryAllCategoryAction" 
+  			class="com.huike.category.controller.CategoryAction" method="findAll">
+			<result>/jsps/left.jsp</result>  		
+  		</action>
+  </package>
+  <package name="book" namespace="/book" extends="struts-default">
+  		<action name="queryAllBooksByCidAction" 
+  			class="com.huike.book.controller.BookAction" method="findBooksByCid">
+			<result>/jsps/book/list.jsp</result>  		
+  		</action>
+  		<action name="queryBookByBidAction" 
+  			class="com.huike.book.controller.BookAction" method="queryBookByBid">
+			<result>/jsps/book/desc.jsp</result>  		
+  		</action>
+  		<action name="findBooksByAuthorAction" 
+  			class="com.huike.book.controller.BookAction" method="findBooksByAuthor">
+			<result>/jsps/book/list.jsp</result>  		
+  		</action>
+  		<action name="findBooksByBnameAction" 
+  			class="com.huike.book.controller.BookAction" method="findBooksByBname">
+			<result>/jsps/book/list.jsp</result>  		
+  		</action>
+  		<action name="findBooksByPressAction" 
+  			class="com.huike.book.controller.BookAction" method="findBooksByPress">
+			<result>/jsps/book/list.jsp</result>  		
+  		</action>
+  </package>
+  
+  <package name="search" namespace="/search" extends="struts-default">
+  		<action name="findBooksByBnameAction" 
+  			class="com.huike.book.controller.BookAction" method="findBooksByBname">
+			<result>/jsps/book/list.jsp</result>  		
+  		</action>
+  		<action name="queryBookByParamComAction" 
+  			class="com.huike.book.controller.BookAction" method="queryBookByParamCom">
+			<result>/jsps/book/list.jsp</result>  		
+  		</action>
+  </package>
+  
+  <package name="cart" namespace="/cart" extends="json-default">
+  		<action name="myCartAction" class="com.huike.cart.controller.CartAction" method="myCart">
+			<result>/jsps/cart/list.jsp</result>  		
+  		</action>
+  		<action name="addCartAction" class="com.huike.cart.controller.CartAction" method="addCart">
+			<result name="success" type="redirectAction">myCartAction</result>
+  		</action>
+  		<action name="batchDeleteCartItemsByIdsAction" class="com.huike.cart.controller.CartAction" method="batchDeleteCartItemsByIds">
+			<result name="success" type="redirectAction">myCartAction</result>  		
+  		</action>
+  		<action name="updateQuantityByCartItemIdAction" class="com.huike.cart.controller.CartAction" 
+		  		method="updateQuantityByCartItemId">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+  		</action>
+  		<action name="loadChooseCartItemsAction" class="com.huike.cart.controller.CartAction" method="loadChooseCartItems">
+			<result>/jsps/cart/showitem.jsp</result>  		
+  		</action>
+  </package>
+   
+  <package name="order" namespace="/order" extends="struts-default">
+  		<action name="addOrderAction" 
+  			class="com.huike.order.controller.OrderAction" method="addOrder">
+			<result>/jsps/order/ordersucc.jsp</result>  		
+  		</action>
+  		<action name="myOrdersAction" 
+  			class="com.huike.order.controller.OrderAction" method="myOrders">
+			<result>/jsps/order/list.jsp</result> 	
+  		</action>
+  		
+  </package>
+</struts>

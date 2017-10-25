@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ 
+  
+<!--   <servlet>
+  	<servlet-name>VerifyCodeServlet</servlet-name>
+  	<servlet-class>com.huike.utils.vcode.servlet.VerifyCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>VerifyCodeServlet</servlet-name>
+  	<url-pattern>/servlet/VerifyCodeServlet</url-pattern>
+  </servlet-mapping> -->
+  
+  <!-- <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.huike.utils.filter.EncodingFilter</filter-class>
+    <init-param>
+		<param-name>charset</param-name>
+		<param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping> -->
+  
+  <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    	<init-param>
+    		<param-name>struts.action.extension</param-name>
+    		<param-value>do,,</param-value>
+    	</init-param>
+    </filter>
+    
+    <filter-mapping>
+    	<!-- struts2要接管web层, 让struts2去管理所有的控制器, -->
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+  
+</web-app>

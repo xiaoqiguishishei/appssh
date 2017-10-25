@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+.regist {
+	width: 880px;
+	height: 450px;
+	border: 1px solid #d0d0d0;
+	margin: 0 auto;
+}
+
+.top{
+	height: 35px;
+	
+	/* 精灵图  把多张图片合成到一个图片中  */
+	background: url("/goods_struts2/images/bg_btns.png") 0px -132px;
+	
+}
+
+.top span{
+	font-weight: 900;
+	line-height:35px;
+	margin-left: 18px; 
+}
+
+.left{
+	width: 300px;
+	text-align: right;
+	
+}
+.verify{
+	display: inline-block;
+	width: 240px;
+	height: 60px;
+	border: 1px solid #e2e2e2;
+	margin-bottom: 20px;
+}
+
+.verify img{
+	margin-left: 75px;
+	margin-top: 10px;
+}
+
+.registBody tr{
+	line-height: 50px;
+}
+
+.registBody input{
+	width: 240px;
+	height: 32px;
+	border: 1px solid #7f9db9;
+	font-size: 20px;
+}
+
+.error{
+	color: #f40000;
+	background: url("/goods_struts2/images/error.png") no-repeat #fef2f2;
+	padding-left: 30px;
+	width: 150px;
+	height: 30px;
+	display: inline-block;
+	line-height: 30px;
+	visibility: hidden;  /* 隐藏元素 */
+}
+
+#registBtn {
+	width: 240px;
+	height: 33px;
+	border: none; /* 权重不够  */
+}
+

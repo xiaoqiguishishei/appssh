@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<!-- 负责和数据库产生连接, 然后咱们程序在<session-factory>拿到连接 -->
+<session-factory>
+	<!-- 数据库连接的驱动类 -->
+	<property name="hibernate.connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
+	<property name="hibernate.connection.url">
+		jdbc:mysql:///goods
+	</property>
+	<property name="hibernate.connection.username">root</property>
+	<property name="hibernate.connection.password">root</property>
+
+	<!-- hibernate的方言 -->
+	<property name="hibernate.dialect">
+		org.hibernate.dialect.MySQLDialect
+	</property>
+
+	<!-- <property name="connection.url">
+		jdbc:mysql://localhost:3306/goods?useUnicode=true&amp;characterEncoding=UTF-8
+		</property> -->
+
+	<!-- 可选的配置 -->
+	<!-- 打印创建的sql语句 -->
+	<property name="hibernate.show_sql">true</property>
+	<property name="hibernate.format_sql">true</property>
+	<!-- <property name="hbm2ddl.auto">update</property> -->
+
+	<!-- 自动提交 -->
+	<!-- <property name="hibernate.connection.autocommit">true</property> -->
+
+	<!-- c3p0的配置,连接池类, 使用这个类要显示的在项目中导入c3p0jar包 -->
+	<property name="connection.provider_class">
+		org.hibernate.connection.C3P0ConnectionProvider
+	</property>
+
+	<!-- 最小连接数, 最大连接数, 最长等待时间毫秒, 最大的空闲时间毫秒 -->
+	<property name="c3p0.min_size">5</property>
+	<property name="c3p0.max_size">20</property>
+	<property name="c3p0.timeout">100</property>
+	<property name="c3p0.idle_test_period">3000</property>
+	<mapping resource="com/huike/book/domain/TBook.hbm.xml" />
+	<mapping resource="com/huike/cart/domain/TCartitem.hbm.xml" />
+	<mapping resource="com/huike/order/domain/TOrder.hbm.xml" />
+	<mapping resource="com/huike/order/domain/TOrderitem.hbm.xml" />
+	<mapping resource="com/huike/user/domain/TUser.hbm.xml" />
+	<mapping resource="com/huike/category/domain/TCategory.hbm.xml" />
+
+
+</session-factory>
+</hibernate-configuration>
